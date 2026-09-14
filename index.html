@@ -25,7 +25,7 @@ input::placeholder,textarea::placeholder{color:#8C857E;opacity:1}
 </helmet>
 
 <div ref="{{ stageRef }}" style="position:relative;width:100vw;height:100vh;background:#E7E2DA;font-family:Apercu,sans-serif;color:#2F2B2B;-webkit-font-smoothing:antialiased;overflow:hidden">
-<div style="position:absolute;left:50%;top:50%;width:1440px;height:944px;transform-origin:center center;transform:translate(-50%,-50%) scale({{ scale }});display:flex;flex-direction:column">
+<div style="position:absolute;left:50%;top:50%;width:1440px;height:988px;transform-origin:center center;transform:translate(-50%,-50%) scale({{ scale }});display:flex;flex-direction:column">
 <sc-if value="{{ ownMerchant }}" hint-placeholder-val="{{ false }}">
 <div style="height:44px;flex:0 0 auto;display:flex;align-items:center;padding:0 18px;font:700 13px/1 Apercu,sans-serif;letter-spacing:.2em;text-transform:uppercase;background:#FFAC00;color:#2F2B2B">Shopify / Merchant</div>
 </sc-if>
@@ -33,7 +33,7 @@ input::placeholder,textarea::placeholder{color:#8C857E;opacity:1}
 <div style="height:44px;flex:0 0 auto;display:flex;align-items:center;padding:0 18px;font:700 13px/1 Apercu,sans-serif;letter-spacing:.2em;text-transform:uppercase;background:#006298;color:#FFFFFF">LIF.co</div>
 </sc-if>
 <sc-if value="{{ ownEmail }}" hint-placeholder-val="{{ false }}">
-<div style="height:44px;flex:0 0 auto;display:flex;align-items:center;padding:0 18px;font:700 13px/1 Apercu,sans-serif;letter-spacing:.2em;text-transform:uppercase;background:#CA0000;color:#FFFFFF">Email</div>
+<div style="height:44px;flex:0 0 auto;display:flex;align-items:center;padding:0 18px;font:700 13px/1 Apercu,sans-serif;letter-spacing:.2em;text-transform:uppercase;background:#CA0000;color:#FFFFFF">{{ emailLabel }}</div>
 </sc-if>
 <sc-if value="{{ ownNone }}" hint-placeholder-val="{{ true }}">
 <div style="height:44px;flex:0 0 auto"></div>
@@ -118,15 +118,18 @@ input::placeholder,textarea::placeholder{color:#8C857E;opacity:1}
 <div style="display:flex;flex-direction:column;gap:8px">
 <div style="font:700 11px/1.3 Apercu,sans-serif;letter-spacing:.2em;text-transform:uppercase;color:#7A736D">Name</div>
 <input type="text" value="{{ raw.receiver }}" onChange="{{ on.receiver }}" placeholder="(RECEIVER NAME)" style="height:66px;border:none;border-bottom:1px solid #2F2B2B;background:transparent;padding:0 2px;font:400 25px/1.4 Apercu,sans-serif;color:#2F2B2B">
+<div style="min-height:22px;font:400 15px/1.45 Apercu,sans-serif;color:#CA0000">{{ err.receiver }}</div>
 </div>
 <div style="display:flex;flex-direction:column;gap:8px">
 <div style="font:700 11px/1.3 Apercu,sans-serif;letter-spacing:.2em;text-transform:uppercase;color:#7A736D">Email</div>
 <input type="text" value="{{ raw.receiverEmail }}" onChange="{{ on.receiverEmail }}" placeholder="(RECEIVER EMAIL)" style="height:66px;border:none;border-bottom:1px solid #2F2B2B;background:transparent;padding:0 2px;font:400 25px/1.4 Apercu,sans-serif;color:#2F2B2B">
+<div style="min-height:22px;font:400 15px/1.45 Apercu,sans-serif;color:#CA0000">{{ err.receiverEmail }}</div>
 </div>
 <div style="font:400 18px/1.6 Apercu,sans-serif;color:#7A736D;max-width:40ch;text-wrap:pretty">Only to deliver this Love It Forward. Never for marketing.</div>
 <h2 style="margin:6px 0 0;font:400 38px/1.2 'Romana BT',serif">Why them?</h2>
 <div style="font:400 19px/1.6 Apercu,sans-serif;color:#7A736D">A few words is plenty.</div>
 <textarea rows="3" value="{{ raw.giverNote }}" onChange="{{ on.giverNote }}" placeholder="(GIVER NOTE)" style="height:132px;border:1px solid #2F2B2B;border-radius:4px;background:#FFFFFF;padding:18px 20px;font:400 21px/1.55 Apercu,sans-serif;color:#2F2B2B;resize:none;font-family:Apercu,sans-serif"></textarea>
+<div style="min-height:22px;font:400 15px/1.45 Apercu,sans-serif;color:#CA0000">{{ err.giverNote }}</div>
 </div>
 <div style="flex:1 1 0;min-width:0;display:flex;flex-direction:column;gap:18px;justify-content:center">
 <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px">
@@ -136,9 +139,10 @@ input::placeholder,textarea::placeholder{color:#8C857E;opacity:1}
 <button type="button" onClick="{{ amtOther }}" style="height:78px;border:1px solid #2F2B2B;border-radius:4px;background:transparent;font:700 14px/1.2 Apercu,sans-serif;letter-spacing:.14em;text-transform:uppercase;cursor:pointer" style-hover="background:#2F2B2B;color:#FDFCF8">Other</button>
 </div>
 <sc-if value="{{ otherOpen }}" hint-placeholder-val="{{ false }}">
-<input type="text" value="{{ raw.amount }}" onChange="{{ on.amount }}" placeholder="(AMOUNT)" style="height:66px;border:none;border-bottom:1px solid #2F2B2B;background:transparent;padding:0 2px;font:400 25px/1.4 Apercu,sans-serif;color:#2F2B2B">
+<input type="text" value="{{ raw.amount }}" onChange="{{ on.amount }}" placeholder="(AMOUNT)" inputMode="decimal" style="height:66px;border:none;border-bottom:1px solid #2F2B2B;background:transparent;padding:0 2px;font:400 25px/1.4 Apercu,sans-serif;color:#2F2B2B">
 </sc-if>
-<button type="button" onClick="{{ next }}" style="align-self:flex-start;min-height:60px;background:#F3A43A;color:#2F2B2B;border:none;border-radius:4px;font:700 14px/1.25 Apercu,sans-serif;letter-spacing:.16em;text-transform:uppercase;padding:18px 40px;cursor:pointer;margin-top:6px" style-hover="background:#2F2B2B;color:#FDFCF8">Continue to payment</button>
+<div style="min-height:22px;font:400 15px/1.45 Apercu,sans-serif;color:#CA0000">{{ err.amount }}</div>
+<button type="button" onClick="{{ submitChooser }}" style="align-self:flex-start;min-height:60px;background:#F3A43A;color:#2F2B2B;border:none;border-radius:4px;font:700 14px/1.25 Apercu,sans-serif;letter-spacing:.16em;text-transform:uppercase;padding:18px 40px;cursor:pointer;margin-top:6px" style-hover="background:#2F2B2B;color:#FDFCF8">Continue to payment</button>
 </div>
 </div>
 <div style="flex:0 0 auto;font:italic 400 19px/1.4 'Romana BT',serif;color:#7A736D">Have love. Will share.</div>
@@ -151,11 +155,12 @@ input::placeholder,textarea::placeholder{color:#8C857E;opacity:1}
 <div style="flex:1;display:flex;min-height:0">
 <div style="flex:1 1 0;min-width:0;padding:72px 80px;display:flex;flex-direction:column;gap:26px">
 <div style="font:400 15px/1.4 'Helvetica Neue',Helvetica,Arial,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#6B6664">Contact</div>
-<div style="height:64px;border:1px solid #C9C4C0;border-radius:4px;display:flex;align-items:center;padding:0 20px;font:400 19px/1.4 'Helvetica Neue',Helvetica,Arial,sans-serif;color:#8A8580">Email</div>
+<input type="email" value="{{ raw.giverEmail }}" onChange="{{ on.giverEmail }}" placeholder="Email" style="height:64px;border:1px solid #C9C4C0;border-radius:4px;padding:0 20px;font:400 19px/1.4 'Helvetica Neue',Helvetica,Arial,sans-serif;color:#111;background:#FFFFFF;width:100%">
+<div style="min-height:22px;font:400 15px/1.45 Apercu,sans-serif;color:#CA0000">{{ err.giverEmail }}</div>
 <div style="font:400 15px/1.4 'Helvetica Neue',Helvetica,Arial,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#6B6664;margin-top:8px">Payment</div>
 <div style="height:64px;border:1px solid #C9C4C0;border-radius:4px;display:flex;align-items:center;padding:0 20px;font:400 19px/1.4 'Helvetica Neue',Helvetica,Arial,sans-serif;color:#8A8580">Card number</div>
 <div style="display:flex;gap:18px"><div style="flex:1;height:64px;border:1px solid #C9C4C0;border-radius:4px;display:flex;align-items:center;padding:0 20px;font:400 19px/1.4 'Helvetica Neue',Helvetica,Arial,sans-serif;color:#8A8580">MM / YY</div><div style="flex:1;height:64px;border:1px solid #C9C4C0;border-radius:4px;display:flex;align-items:center;padding:0 20px;font:400 19px/1.4 'Helvetica Neue',Helvetica,Arial,sans-serif;color:#8A8580">CVC</div></div>
-<button type="button" onClick="{{ next }}" style="height:70px;background:#111111;color:#FFFFFF;border:none;border-radius:4px;font:700 15px/1.25 Apercu,sans-serif;letter-spacing:.16em;text-transform:uppercase;cursor:pointer;margin-top:10px" style-hover="background:#2F2B2B">Pay now</button>
+<button type="button" onClick="{{ payGiver }}" style="height:70px;background:#111111;color:#FFFFFF;border:none;border-radius:4px;font:700 15px/1.25 Apercu,sans-serif;letter-spacing:.16em;text-transform:uppercase;cursor:pointer;margin-top:10px" style-hover="background:#2F2B2B">Pay now</button>
 </div>
 <div style="width:520px;flex:0 0 auto;background:#F7F5F2;border-left:1px solid #E5E2DE;padding:72px 60px;display:flex;flex-direction:column;gap:24px">
 <div style="display:flex;justify-content:space-between;gap:24px;font:400 21px/1.5 'Helvetica Neue',Helvetica,Arial,sans-serif;color:#111"><span>Love It Forward for {{ receiver }}</span><span>{{ amount }}</span></div>
@@ -176,14 +181,34 @@ input::placeholder,textarea::placeholder{color:#8C857E;opacity:1}
 </div>
 <div style="flex:1;min-width:0;background:#FDFCF8;border-left:1px solid #E5E2DE;padding:72px 68px;display:flex;flex-direction:column;justify-content:center;gap:28px;animation:lifIn 700ms cubic-bezier(.16,1,.3,1) both">
 <div style="display:flex;align-items:center;gap:14px;align-self:flex-start"><img src="assets/lif-mark-sol.png" alt="LIF mark" style="height:38px;width:auto;object-fit:contain;flex:0 0 auto"><img src="assets/lif-wordmark.png" alt="Love It Forward" style="height:19px;width:auto;object-fit:contain;flex:0 0 auto"></div>
-<h2 style="margin:0;font:700 48px/1.16 Apercu,sans-serif;letter-spacing:-.01em;display:flex;align-items:center;gap:14px;flex-wrap:wrap">You Loved It Forward. <img src="assets/heart-drawn.png" alt="Heart" style="height:56px;width:auto;object-fit:contain;mix-blend-mode:multiply;animation:lifHeart 780ms cubic-bezier(.16,1,.3,1) 220ms both;flex:0 0 auto"></h2>
+<h2 style="margin:0;font:700 48px/1.16 Apercu,sans-serif;letter-spacing:-.01em;display:flex;align-items:center;gap:14px;flex-wrap:wrap">You Loved It Forward.</h2>
 <div style="display:flex;flex-direction:column;gap:14px;font:400 23px/1.6 Apercu,sans-serif">
 <div>You thought of {{ receiver }}.</div>
 <div>We&rsquo;ll take it from here.</div>
 </div>
 </div>
 </div>
-<button type="button" onClick="{{ next }}" aria-label="Continue" style="position:absolute;right:34px;bottom:26px;min-height:52px;background:transparent;border:1px solid #C9C4C0;border-radius:4px;color:#6B6664;font:700 12px/1.25 Apercu,sans-serif;letter-spacing:.16em;text-transform:uppercase;padding:15px 26px;cursor:pointer;opacity:.75" style-hover="opacity:1;border-color:#2F2B2B;color:#2F2B2B">Continue</button>
+</div>
+</sc-if>
+
+<sc-if value="{{ s.EM01 }}" hint-placeholder-val="{{ false }}">
+<div style="width:1440px;height:900px;padding:64px 200px;display:flex;flex-direction:column;justify-content:center">
+<div style="border:1px solid #DCD5CB;background:#FFFFFF;display:flex;flex-direction:column">
+<div style="padding:26px 44px;border-bottom:1px solid #E8E2D9;background:#F7F5F2;display:flex;flex-direction:column;gap:10px">
+<div style="font:400 16px/1.5 Apercu,sans-serif;color:#7A736D">From Love It Forward. To {{ giverEmail }}.</div>
+<div style="font:700 15px/1.4 Apercu,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#2F2B2B">On its way to {{ receiver }}.</div>
+</div>
+<div style="background:#FDFCF8;padding:76px 76px 64px;display:flex;flex-direction:column;gap:30px">
+<div style="display:flex;align-items:center;gap:13px;align-self:flex-start"><img src="assets/lif-mark-sol.png" alt="LIF mark" style="height:34px;width:auto;object-fit:contain;flex:0 0 auto"><img src="assets/lif-wordmark.png" alt="Love It Forward" style="height:17px;width:auto;object-fit:contain;flex:0 0 auto"></div>
+<h2 style="margin:0;font:400 56px/1.12 'Romana BT',serif">On its way to {{ receiver }}.</h2>
+<div style="display:flex;flex-direction:column;gap:14px;font:400 24px/1.6 Apercu,sans-serif">
+<div>You thought of {{ receiver }}.</div>
+<div>Your Love It Forward is on its way.</div>
+<div>We&rsquo;ll take it from here.</div>
+</div>
+<div style="border-top:1px solid #E6E0D7;padding-top:26px;font:italic 400 19px/1.4 'Romana BT',serif;color:#7A736D">Have love. Will share.</div>
+</div>
+</div>
 </div>
 </sc-if>
 
@@ -203,7 +228,27 @@ input::placeholder,textarea::placeholder{color:#8C857E;opacity:1}
 </div>
 <h2 style="margin:0;font:400 62px/1.1 'Romana BT',serif">You came to mind.</h2>
 <div style="font:400 24px/1.65 Apercu,sans-serif">A note is waiting for you.</div>
-<button type="button" onClick="{{ next }}" style="align-self:flex-start;min-height:60px;background:#F3A43A;color:#2F2B2B;border:none;border-radius:4px;font:700 14px/1.25 Apercu,sans-serif;letter-spacing:.16em;text-transform:uppercase;padding:18px 40px;cursor:pointer" style-hover="background:#2F2B2B;color:#FDFCF8">See who thought of you</button>
+<button type="button" onClick="{{ enterReveal }}" style="align-self:flex-start;min-height:60px;background:#F3A43A;color:#2F2B2B;border:none;border-radius:4px;font:700 14px/1.25 Apercu,sans-serif;letter-spacing:.16em;text-transform:uppercase;padding:18px 40px;cursor:pointer" style-hover="background:#2F2B2B;color:#FDFCF8">See who thought of you</button>
+<div style="border-top:1px solid #E6E0D7;padding-top:26px;font:italic 400 19px/1.4 'Romana BT',serif;color:#7A736D">Have love. Will share.</div>
+</div>
+</div>
+</div>
+</sc-if>
+
+
+<sc-if value="{{ s.EM03 }}" hint-placeholder-val="{{ false }}">
+<div style="width:1440px;height:900px;padding:64px 200px;display:flex;flex-direction:column;justify-content:center">
+<div style="border:1px solid #DCD5CB;background:#FFFFFF;display:flex;flex-direction:column">
+<div style="padding:26px 44px;border-bottom:1px solid #E8E2D9;background:#F7F5F2;display:flex;flex-direction:column;gap:10px">
+<div style="font:400 16px/1.5 Apercu,sans-serif;color:#7A736D">From {{ brand }} and Love It Forward. To {{ receiverEmail }}.</div>
+<div style="font:700 15px/1.4 Apercu,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#2F2B2B">A note is waiting for you.</div>
+<div style="font:400 16px/1.5 Apercu,sans-serif;color:#7A736D">Someone thought of you.</div>
+</div>
+<div style="background:#FDFCF8;padding:76px 76px 64px;display:flex;flex-direction:column;gap:30px">
+<div style="display:flex;align-items:center;gap:13px;align-self:flex-start"><img src="assets/lif-mark-sol.png" alt="LIF mark" style="height:34px;width:auto;object-fit:contain;flex:0 0 auto"><img src="assets/lif-wordmark.png" alt="Love It Forward" style="height:17px;width:auto;object-fit:contain;flex:0 0 auto"></div>
+<h2 style="margin:0;font:400 58px/1.12 'Romana BT',serif">Someone thought of you.</h2>
+<div style="font:400 24px/1.65 Apercu,sans-serif">Your note is still waiting.</div>
+<button type="button" onClick="{{ enterReveal }}" style="align-self:flex-start;min-height:60px;background:#F3A43A;color:#2F2B2B;border:none;border-radius:4px;font:700 14px/1.25 Apercu,sans-serif;letter-spacing:.16em;text-transform:uppercase;padding:18px 40px;cursor:pointer" style-hover="background:#2F2B2B;color:#FDFCF8">See who thought of you</button>
 <div style="border-top:1px solid #E6E0D7;padding-top:26px;font:italic 400 19px/1.4 'Romana BT',serif;color:#7A736D">Have love. Will share.</div>
 </div>
 </div>
@@ -220,7 +265,7 @@ input::placeholder,textarea::placeholder{color:#8C857E;opacity:1}
 </div>
 <div style="flex:0 0 auto;display:flex;align-items:center;gap:16px;flex-wrap:wrap">
 <button type="button" onClick="{{ next }}" style="min-height:60px;background:#F3A43A;color:#2F2B2B;border:none;border-radius:4px;font:700 14px/1.25 Apercu,sans-serif;letter-spacing:.16em;text-transform:uppercase;padding:18px 40px;cursor:pointer" style-hover="background:#2F2B2B;color:#FDFCF8">See what&rsquo;s waiting for you</button>
-<button type="button" onClick="{{ sendHeart }}" style="min-height:60px;background:transparent;border:1px solid #CA0000;border-radius:4px;color:#CA0000;font:700 14px/1.25 Apercu,sans-serif;letter-spacing:.14em;text-transform:uppercase;padding:18px 34px;cursor:pointer" style-hover="background:#CA0000;color:#FDFCF8">Send {{ giver }} some love <span style="margin-left:8px">&#9829;</span></button>
+<button type="button" onClick="{{ sendHeart }}" style="min-height:60px;background:transparent;border:1px solid #CA0000;border-radius:4px;color:#CA0000;font:700 14px/1.25 Apercu,sans-serif;letter-spacing:.14em;text-transform:uppercase;padding:18px 34px;cursor:pointer" style-hover="background:#CA0000;color:#FDFCF8">Send {{ giver }} some love</button>
 <div style="margin-left:auto;font:italic 400 19px/1.4 'Romana BT',serif;color:#7A736D">Have love. Will share.</div>
 </div>
 </sc-if>
@@ -234,6 +279,23 @@ input::placeholder,textarea::placeholder{color:#8C857E;opacity:1}
 <div style="margin-left:auto;font:italic 400 19px/1.4 'Romana BT',serif;color:#7A736D">Have love. Will share.</div>
 </div>
 </sc-if>
+</div>
+</sc-if>
+
+
+<sc-if value="{{ s.EM04 }}" hint-placeholder-val="{{ false }}">
+<div style="width:1440px;height:900px;padding:64px 200px;display:flex;flex-direction:column;justify-content:center">
+<div style="border:1px solid #DCD5CB;background:#FFFFFF;display:flex;flex-direction:column">
+<div style="padding:26px 44px;border-bottom:1px solid #E8E2D9;background:#F7F5F2;display:flex;flex-direction:column;gap:10px">
+<div style="font:400 16px/1.5 Apercu,sans-serif;color:#7A736D">From Love It Forward. To {{ giverEmail }}.</div>
+<div style="font:700 15px/1.4 Apercu,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#2F2B2B">{{ receiver }} sent some love back. &#9829;</div>
+</div>
+<div style="background:#FDFCF8;padding:76px 76px 64px;display:flex;flex-direction:column;gap:30px">
+<div style="display:flex;align-items:center;gap:13px;align-self:flex-start"><img src="assets/lif-mark-sol.png" alt="LIF mark" style="height:34px;width:auto;object-fit:contain;flex:0 0 auto"><img src="assets/lif-wordmark.png" alt="Love It Forward" style="height:17px;width:auto;object-fit:contain;flex:0 0 auto"></div>
+<h2 style="margin:0;font:400 56px/1.14 'Romana BT',serif;display:flex;align-items:center;gap:16px">{{ receiver }} sent some love back. <img src="assets/heart-drawn.png" alt="Heart" style="height:64px;width:auto;object-fit:contain;mix-blend-mode:multiply;flex:0 0 auto"></h2>
+<div style="border-top:1px solid #E6E0D7;padding-top:26px;font:italic 400 19px/1.4 'Romana BT',serif;color:#7A736D">Have love. Will share.</div>
+</div>
+</div>
 </div>
 </sc-if>
 
@@ -320,10 +382,11 @@ input::placeholder,textarea::placeholder{color:#8C857E;opacity:1}
 <div style="flex:1;display:flex;min-height:0">
 <div style="flex:1 1 0;min-width:0;padding:72px 80px;display:flex;flex-direction:column;gap:26px">
 <div style="font:400 15px/1.4 'Helvetica Neue',Helvetica,Arial,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#6B6664">Contact</div>
-<div style="height:64px;border:1px solid #C9C4C0;border-radius:4px;display:flex;align-items:center;padding:0 20px;font:400 19px/1.4 'Helvetica Neue',Helvetica,Arial,sans-serif;color:#8A8580">Email</div>
+<input type="email" value="{{ raw.receiverEmail }}" onChange="{{ on.receiverEmail }}" placeholder="Email" style="height:64px;border:1px solid #C9C4C0;border-radius:4px;padding:0 20px;font:400 19px/1.4 'Helvetica Neue',Helvetica,Arial,sans-serif;color:#111;background:#FFFFFF;width:100%">
+<div style="min-height:22px;font:400 15px/1.45 Apercu,sans-serif;color:#CA0000">{{ err.checkoutEmail }}</div>
 <div style="font:400 15px/1.4 'Helvetica Neue',Helvetica,Arial,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#6B6664;margin-top:8px">Payment</div>
 <div style="height:64px;border:1px solid #C9C4C0;border-radius:4px;display:flex;align-items:center;padding:0 20px;font:400 19px/1.4 'Helvetica Neue',Helvetica,Arial,sans-serif;color:#8A8580">Card number</div>
-<button type="button" onClick="{{ next }}" style="height:70px;background:#111111;color:#FFFFFF;border:none;border-radius:4px;font:700 15px/1.25 Apercu,sans-serif;letter-spacing:.16em;text-transform:uppercase;cursor:pointer;margin-top:10px" style-hover="background:#2F2B2B">Pay now</button>
+<button type="button" onClick="{{ payReceiver }}" style="height:70px;background:#111111;color:#FFFFFF;border:none;border-radius:4px;font:700 15px/1.25 Apercu,sans-serif;letter-spacing:.16em;text-transform:uppercase;cursor:pointer;margin-top:10px" style-hover="background:#2F2B2B">Pay now</button>
 </div>
 <div style="width:560px;flex:0 0 auto;background:#F7F5F2;border-left:1px solid #E5E2DE;padding:72px 60px;display:flex;flex-direction:column;gap:22px">
 <div style="display:flex;align-items:center;gap:20px">
@@ -360,6 +423,29 @@ input::placeholder,textarea::placeholder{color:#8C857E;opacity:1}
 <div>Just between you.</div>
 </div>
 <button type="button" onClick="{{ next }}" style="align-self:flex-start;min-height:60px;background:#F3A43A;color:#2F2B2B;border:none;border-radius:4px;font:700 14px/1.25 Apercu,sans-serif;letter-spacing:.16em;text-transform:uppercase;padding:18px 40px;cursor:pointer" style-hover="background:#2F2B2B;color:#FDFCF8">Send {{ giver }} a thank-you</button>
+</div>
+</div>
+</div>
+</sc-if>
+
+
+<sc-if value="{{ s.EM05 }}" hint-placeholder-val="{{ false }}">
+<div style="width:1440px;height:900px;padding:64px 200px;display:flex;flex-direction:column;justify-content:center">
+<div style="border:1px solid #DCD5CB;background:#FFFFFF;display:flex;flex-direction:column">
+<div style="padding:26px 44px;border-bottom:1px solid #E8E2D9;background:#F7F5F2;display:flex;flex-direction:column;gap:10px">
+<div style="font:400 16px/1.5 Apercu,sans-serif;color:#7A736D">From Love It Forward. To {{ receiverEmail }}.</div>
+<div style="font:700 15px/1.4 Apercu,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#2F2B2B">Want to thank {{ giver }}?</div>
+<div style="font:400 16px/1.5 Apercu,sans-serif;color:#7A736D">A note, photo or short video. Just between you.</div>
+</div>
+<div style="background:#FDFCF8;padding:76px 76px 64px;display:flex;flex-direction:column;gap:30px">
+<div style="display:flex;align-items:center;gap:13px;align-self:flex-start"><img src="assets/lif-mark-sol.png" alt="LIF mark" style="height:34px;width:auto;object-fit:contain;flex:0 0 auto"><img src="assets/lif-wordmark.png" alt="Love It Forward" style="height:17px;width:auto;object-fit:contain;flex:0 0 auto"></div>
+<h2 style="margin:0;font:400 54px/1.14 'Romana BT',serif">Want to thank {{ giver }}?</h2>
+<div style="display:flex;flex-direction:column;gap:14px;font:400 24px/1.6 Apercu,sans-serif">
+<div>A note, photo or short video.</div>
+<div>Just between you.</div>
+</div>
+<button type="button" onClick="{{ goComposer }}" style="align-self:flex-start;min-height:60px;background:#F3A43A;color:#2F2B2B;border:none;border-radius:4px;font:700 14px/1.25 Apercu,sans-serif;letter-spacing:.16em;text-transform:uppercase;padding:18px 40px;cursor:pointer" style-hover="background:#2F2B2B;color:#FDFCF8">Send {{ giver }} a thank-you</button>
+<div style="border-top:1px solid #E6E0D7;padding-top:26px;font:italic 400 19px/1.4 'Romana BT',serif;color:#7A736D">Have love. Will share.</div>
 </div>
 </div>
 </div>
@@ -403,9 +489,8 @@ input::placeholder,textarea::placeholder{color:#8C857E;opacity:1}
 <div style="height:480px;padding:64px 150px 44px;display:flex;flex-direction:column;box-sizing:border-box">
 <div style="display:flex;align-items:center;gap:14px;flex:0 0 auto"><img src="assets/lif-mark-sol.png" alt="LIF mark" style="height:38px;width:auto;object-fit:contain;flex:0 0 auto"><img src="assets/lif-wordmark.png" alt="Love It Forward" style="height:19px;width:auto;object-fit:contain;flex:0 0 auto"></div>
 <div style="flex:1;display:flex;align-items:center;animation:lifIn 700ms cubic-bezier(.16,1,.3,1) both">
-<h2 style="margin:0;font:400 76px/1.1 'Romana BT',serif">Sent to {{ giver }}. <span style="color:#CA0000">&#9829;</span></h2>
+<h2 style="margin:0;font:400 76px/1.1 'Romana BT',serif;display:flex;align-items:center;gap:18px">Sent to {{ giver }}. <img src="assets/heart-drawn.png" alt="Heart" style="height:82px;width:auto;object-fit:contain;mix-blend-mode:multiply;flex:0 0 auto"></h2>
 </div>
-<div style="flex:0 0 auto;font:italic 400 19px/1.4 'Romana BT',serif;color:#7A736D">Have love. Will share.</div>
 </div>
 <div style="padding:52px 150px 76px;display:flex;flex-direction:column;gap:30px;border-top:1px solid #E6E0D7;box-sizing:border-box">
 <h2 style="margin:0;font:400 54px/1.16 'Romana BT',serif">Someone else come to mind?</h2>
@@ -419,6 +504,34 @@ input::placeholder,textarea::placeholder{color:#8C857E;opacity:1}
 </div>
 </sc-if>
 
+
+<sc-if value="{{ s.EM06 }}" hint-placeholder-val="{{ false }}">
+<div style="width:1440px;height:900px;padding:64px 200px;display:flex;flex-direction:column;justify-content:center">
+<div style="border:1px solid #DCD5CB;background:#FFFFFF;display:flex;flex-direction:column">
+<div style="padding:26px 44px;border-bottom:1px solid #E8E2D9;background:#F7F5F2;display:flex;flex-direction:column;gap:10px">
+<div style="font:400 16px/1.5 Apercu,sans-serif;color:#7A736D">From Love It Forward. To {{ giverEmail }}.</div>
+<div style="font:700 15px/1.4 Apercu,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#2F2B2B">{{ receiver }} sent you something.</div>
+</div>
+<div style="background:#FDFCF8;padding:76px 76px 64px;display:flex;flex-direction:column;gap:30px">
+<div style="display:flex;align-items:center;gap:13px;align-self:flex-start"><img src="assets/lif-mark-sol.png" alt="LIF mark" style="height:34px;width:auto;object-fit:contain;flex:0 0 auto"><img src="assets/lif-wordmark.png" alt="Love It Forward" style="height:17px;width:auto;object-fit:contain;flex:0 0 auto"></div>
+<div style="border-left:2px solid #F3A43A;padding-left:26px;display:flex;flex-direction:column;gap:14px">
+<div style="font:700 13px/1.3 Apercu,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:#7A736D">From {{ receiver }}</div>
+<div style="font:400 34px/1.42 'Romana BT',serif;text-wrap:pretty">&ldquo;{{ receiverNote }}&rdquo;</div>
+</div>
+<sc-if value="{{ photo }}" hint-placeholder-val="{{ false }}">
+<div style="width:100%;height:300px;border:1px solid #DCD5CB;background:#FFFFFF;display:flex;align-items:center;justify-content:center;overflow:hidden">
+<img src="assets/gratitude-media.jpg" alt="Attached photo" style="max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain;display:block">
+</div>
+</sc-if>
+<sc-if value="{{ video }}" hint-placeholder-val="{{ false }}">
+<div style="padding:40px 20px;background:#F4F1EC;border:1px solid #DCD5CB;font:400 19px/1.5 Apercu,sans-serif;color:#7A736D;text-align:center">Short video attached.</div>
+</sc-if>
+<div style="border-top:1px solid #E6E0D7;padding-top:26px;font:italic 400 19px/1.4 'Romana BT',serif;color:#7A736D">Have love. Will share.</div>
+</div>
+</div>
+</div>
+</sc-if>
+
 <sc-if value="{{ s.NEWCHOOSER }}" hint-placeholder-val="{{ false }}">
 <div style="width:1440px;height:900px;padding:60px 120px 52px;display:flex;flex-direction:column;gap:30px">
 <div style="display:flex;align-items:center;gap:14px;flex:0 0 auto"><img src="assets/lif-mark-sol.png" alt="LIF mark" style="height:38px;width:auto;object-fit:contain;flex:0 0 auto"><img src="assets/lif-wordmark.png" alt="Love It Forward" style="height:19px;width:auto;object-fit:contain;flex:0 0 auto"></div>
@@ -428,10 +541,12 @@ input::placeholder,textarea::placeholder{color:#8C857E;opacity:1}
 <div style="display:flex;flex-direction:column;gap:8px">
 <div style="font:700 11px/1.3 Apercu,sans-serif;letter-spacing:.2em;text-transform:uppercase;color:#7A736D">Name</div>
 <input type="text" value="{{ raw.newReceiver }}" onChange="{{ on.newReceiver }}" placeholder="(RECEIVER NAME)" style="height:66px;border:none;border-bottom:1px solid #2F2B2B;background:transparent;padding:0 2px;font:400 25px/1.4 Apercu,sans-serif;color:#2F2B2B">
+<div style="min-height:22px;font:400 15px/1.45 Apercu,sans-serif;color:#CA0000">{{ err.newReceiver }}</div>
 </div>
 <div style="display:flex;flex-direction:column;gap:8px">
 <div style="font:700 11px/1.3 Apercu,sans-serif;letter-spacing:.2em;text-transform:uppercase;color:#7A736D">Email</div>
 <input type="text" value="{{ raw.newReceiverEmail }}" onChange="{{ on.newReceiverEmail }}" placeholder="(RECEIVER EMAIL)" style="height:66px;border:none;border-bottom:1px solid #2F2B2B;background:transparent;padding:0 2px;font:400 25px/1.4 Apercu,sans-serif;color:#2F2B2B">
+<div style="min-height:22px;font:400 15px/1.45 Apercu,sans-serif;color:#CA0000">{{ err.newReceiverEmail }}</div>
 </div>
 <div style="font:400 18px/1.6 Apercu,sans-serif;color:#7A736D;max-width:40ch;text-wrap:pretty">Only to deliver this Love It Forward. Never for marketing.</div>
 </div>
@@ -439,6 +554,7 @@ input::placeholder,textarea::placeholder{color:#8C857E;opacity:1}
 <h2 style="margin:0;font:400 38px/1.2 'Romana BT',serif">Why them?</h2>
 <div style="font:400 19px/1.6 Apercu,sans-serif;color:#7A736D">A few words is plenty.</div>
 <textarea rows="3" value="{{ raw.newNote }}" onChange="{{ on.newNote }}" placeholder="(GIVER NOTE)" style="height:132px;border:1px solid #2F2B2B;border-radius:4px;background:#FFFFFF;padding:18px 20px;font:400 21px/1.55 Apercu,sans-serif;color:#2F2B2B;resize:none;font-family:Apercu,sans-serif"></textarea>
+<div style="min-height:22px;font:400 15px/1.45 Apercu,sans-serif;color:#CA0000">{{ err.newNote }}</div>
 <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px">
 <button type="button" onClick="{{ n15 }}" style="height:78px;border:1px solid #2F2B2B;border-radius:4px;background:transparent;font:400 24px/1.2 Apercu,sans-serif;cursor:pointer" style-hover="background:#2F2B2B;color:#FDFCF8">$15</button>
 <button type="button" onClick="{{ n25 }}" style="height:78px;border:1px solid #2F2B2B;border-radius:4px;background:transparent;font:400 24px/1.2 Apercu,sans-serif;cursor:pointer" style-hover="background:#2F2B2B;color:#FDFCF8">$25</button>
@@ -446,9 +562,10 @@ input::placeholder,textarea::placeholder{color:#8C857E;opacity:1}
 <button type="button" onClick="{{ nOther }}" style="height:78px;border:1px solid #2F2B2B;border-radius:4px;background:transparent;font:700 14px/1.2 Apercu,sans-serif;letter-spacing:.14em;text-transform:uppercase;cursor:pointer" style-hover="background:#2F2B2B;color:#FDFCF8">Other</button>
 </div>
 <sc-if value="{{ otherOpen }}" hint-placeholder-val="{{ false }}">
-<input type="text" value="{{ raw.newAmount }}" onChange="{{ on.newAmount }}" placeholder="(AMOUNT)" style="height:66px;border:none;border-bottom:1px solid #2F2B2B;background:transparent;padding:0 2px;font:400 25px/1.4 Apercu,sans-serif;color:#2F2B2B">
+<input type="text" value="{{ raw.newAmount }}" onChange="{{ on.newAmount }}" placeholder="(AMOUNT)" inputMode="decimal" style="height:66px;border:none;border-bottom:1px solid #2F2B2B;background:transparent;padding:0 2px;font:400 25px/1.4 Apercu,sans-serif;color:#2F2B2B">
 </sc-if>
-<button type="button" onClick="{{ next }}" style="align-self:flex-start;min-height:60px;background:#F3A43A;color:#2F2B2B;border:none;border-radius:4px;font:700 14px/1.25 Apercu,sans-serif;letter-spacing:.16em;text-transform:uppercase;padding:18px 40px;cursor:pointer;margin-top:6px" style-hover="background:#2F2B2B;color:#FDFCF8">Continue to payment</button>
+<div style="min-height:22px;font:400 15px/1.45 Apercu,sans-serif;color:#CA0000">{{ err.newAmount }}</div>
+<button type="button" onClick="{{ submitNewChooser }}" style="align-self:flex-start;min-height:60px;background:#F3A43A;color:#2F2B2B;border:none;border-radius:4px;font:700 14px/1.25 Apercu,sans-serif;letter-spacing:.16em;text-transform:uppercase;padding:18px 40px;cursor:pointer;margin-top:6px" style-hover="background:#2F2B2B;color:#FDFCF8">Continue to payment</button>
 </div>
 </div>
 <div style="flex:0 0 auto;font:italic 400 19px/1.4 'Romana BT',serif;color:#7A736D">Have love. Will share.</div>
@@ -460,10 +577,12 @@ input::placeholder,textarea::placeholder{color:#8C857E;opacity:1}
 <div style="height:80px;flex:0 0 auto;border-bottom:1px solid #E5E2DE;display:flex;align-items:center;justify-content:center;font:700 18px/1.2 'Helvetica Neue',Helvetica,Arial,sans-serif;letter-spacing:.3em;text-transform:uppercase;color:#111">{{ brand }}</div>
 <div style="flex:1;display:flex;min-height:0">
 <div style="flex:1 1 0;min-width:0;padding:72px 80px;display:flex;flex-direction:column;gap:26px">
-<div style="font:400 15px/1.4 'Helvetica Neue',Helvetica,Arial,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#6B6664">Payment</div>
-<div style="height:64px;border:1px solid #C9C4C0;border-radius:4px;display:flex;align-items:center;padding:0 20px;font:400 19px/1.4 'Helvetica Neue',Helvetica,Arial,sans-serif;color:#8A8580">Email</div>
+<div style="font:400 15px/1.4 'Helvetica Neue',Helvetica,Arial,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#6B6664">Contact</div>
+<input type="email" value="{{ raw.receiverEmail }}" onChange="{{ on.receiverEmail }}" placeholder="Email" style="height:64px;border:1px solid #C9C4C0;border-radius:4px;padding:0 20px;font:400 19px/1.4 'Helvetica Neue',Helvetica,Arial,sans-serif;color:#111;background:#FFFFFF;width:100%">
+<div style="min-height:22px;font:400 15px/1.45 Apercu,sans-serif;color:#CA0000">{{ err.newPayEmail }}</div>
+<div style="font:400 15px/1.4 'Helvetica Neue',Helvetica,Arial,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#6B6664;margin-top:8px">Payment</div>
 <div style="height:64px;border:1px solid #C9C4C0;border-radius:4px;display:flex;align-items:center;padding:0 20px;font:400 19px/1.4 'Helvetica Neue',Helvetica,Arial,sans-serif;color:#8A8580">Card number</div>
-<button type="button" onClick="{{ next }}" style="height:70px;background:#111111;color:#FFFFFF;border:none;border-radius:4px;font:700 15px/1.25 Apercu,sans-serif;letter-spacing:.16em;text-transform:uppercase;cursor:pointer;margin-top:10px" style-hover="background:#2F2B2B">Pay now</button>
+<button type="button" onClick="{{ payNew }}" style="height:70px;background:#111111;color:#FFFFFF;border:none;border-radius:4px;font:700 15px/1.25 Apercu,sans-serif;letter-spacing:.16em;text-transform:uppercase;cursor:pointer;margin-top:10px" style-hover="background:#2F2B2B">Pay now</button>
 </div>
 <div style="width:520px;flex:0 0 auto;background:#F7F5F2;border-left:1px solid #E5E2DE;padding:72px 60px;display:flex;flex-direction:column;gap:24px">
 <div style="display:flex;justify-content:space-between;gap:24px;font:400 21px/1.5 'Helvetica Neue',Helvetica,Arial,sans-serif;color:#111"><span>Love It Forward for {{ newReceiver }}</span><span>{{ newAmount }}</span></div>
@@ -484,14 +603,13 @@ input::placeholder,textarea::placeholder{color:#8C857E;opacity:1}
 </div>
 <div style="flex:1;min-width:0;background:#FDFCF8;border-left:1px solid #E5E2DE;padding:72px 68px;display:flex;flex-direction:column;justify-content:center;gap:28px;animation:lifIn 700ms cubic-bezier(.16,1,.3,1) both">
 <div style="display:flex;align-items:center;gap:14px;align-self:flex-start"><img src="assets/lif-mark-sol.png" alt="LIF mark" style="height:38px;width:auto;object-fit:contain;flex:0 0 auto"><img src="assets/lif-wordmark.png" alt="Love It Forward" style="height:19px;width:auto;object-fit:contain;flex:0 0 auto"></div>
-<h2 style="margin:0;font:400 54px/1.14 'Romana BT',serif">You Loved It Forward. <span style="color:#CA0000">&#9829;</span></h2>
+<h2 style="margin:0;font:400 54px/1.14 'Romana BT',serif">You Loved It Forward.</h2>
 <div style="display:flex;flex-direction:column;gap:14px;font:400 23px/1.6 Apercu,sans-serif">
 <div>You thought of {{ newReceiver }}.</div>
 <div>We&rsquo;ll take it from here.</div>
 </div>
 </div>
 </div>
-<button type="button" onClick="{{ next }}" aria-label="Continue" style="position:absolute;right:34px;bottom:26px;min-height:52px;background:transparent;border:1px solid #C9C4C0;border-radius:4px;color:#6B6664;font:700 12px/1.25 Apercu,sans-serif;letter-spacing:.16em;text-transform:uppercase;padding:15px 26px;cursor:pointer;opacity:.75" style-hover="opacity:1;border-color:#2F2B2B;color:#2F2B2B">Continue</button>
 </div>
 </sc-if>
 
@@ -509,9 +627,6 @@ input::placeholder,textarea::placeholder{color:#8C857E;opacity:1}
 <div style="font:400 38px/1.32 'Romana BT',serif;max-width:26ch">What you started is still moving.</div>
 <div style="border-top:1px solid #E6E0D7;padding-top:26px;font:italic 400 19px/1.4 'Romana BT',serif;color:#7A736D">Have love. Will share.</div>
 </div>
-</div>
-<div style="display:flex;justify-content:flex-end;padding-top:24px">
-<button type="button" onClick="{{ next }}" style="min-height:56px;background:transparent;border:1px solid #2F2B2B;border-radius:4px;color:#2F2B2B;font:700 13px/1.25 Apercu,sans-serif;letter-spacing:.16em;text-transform:uppercase;padding:16px 32px;cursor:pointer" style-hover="background:#2F2B2B;color:#FDFCF8">Continue</button>
 </div>
 </div>
 </sc-if>
@@ -634,10 +749,32 @@ input::placeholder,textarea::placeholder{color:#8C857E;opacity:1}
 </div>
 </sc-if>
 
-<sc-if value="{{ showBack }}" hint-placeholder-val="{{ false }}">
-<button type="button" onClick="{{ prev }}" aria-label="Back" style="position:absolute;left:24px;bottom:20px;width:42px;height:42px;display:flex;align-items:center;justify-content:center;background:transparent;border:none;color:#2F2B2B;font:400 21px/1 Apercu,sans-serif;cursor:pointer;opacity:.28" style-hover="opacity:.9">&#8592;</button>
+</div>
+<div style="height:44px;flex:0 0 auto;background:#E7E2DA;border-top:1px solid #D6CFC5;display:flex;align-items:center;justify-content:space-between;padding:0 18px">
+<div style="font:700 11px/1 Apercu,sans-serif;letter-spacing:.2em;text-transform:uppercase;color:#8C857E">Demo navigation</div>
+<div style="display:flex;align-items:center;gap:10px">
+<sc-if value="{{ peekReminder }}" hint-placeholder-val="{{ false }}">
+<button type="button" onClick="{{ viewReminder }}" style="min-height:28px;background:transparent;border:1px dashed #B9B1A6;border-radius:3px;color:#7A736D;font:700 10px/1 Apercu,sans-serif;letter-spacing:.14em;text-transform:uppercase;padding:8px 14px;cursor:pointer" style-hover="border-color:#2F2B2B;color:#2F2B2B">If unopened: reminder email</button>
 </sc-if>
-
+<sc-if value="{{ peekGratitudeEmail }}" hint-placeholder-val="{{ false }}">
+<button type="button" onClick="{{ viewGratitudeEmail }}" style="min-height:28px;background:transparent;border:1px dashed #B9B1A6;border-radius:3px;color:#7A736D;font:700 10px/1 Apercu,sans-serif;letter-spacing:.14em;text-transform:uppercase;padding:8px 14px;cursor:pointer" style-hover="border-color:#2F2B2B;color:#2F2B2B">Alternate route: gratitude email</button>
+</sc-if>
+<sc-if value="{{ peekGratitudeReceived }}" hint-placeholder-val="{{ false }}">
+<button type="button" onClick="{{ viewGratitudeReceived }}" style="min-height:28px;background:transparent;border:1px dashed #B9B1A6;border-radius:3px;color:#7A736D;font:700 10px/1 Apercu,sans-serif;letter-spacing:.14em;text-transform:uppercase;padding:8px 14px;cursor:pointer" style-hover="border-color:#2F2B2B;color:#2F2B2B">Side effect: giver receives gratitude</button>
+</sc-if>
+<sc-if value="{{ peekHeart }}" hint-placeholder-val="{{ false }}">
+<button type="button" onClick="{{ viewHeartEmail }}" style="min-height:28px;background:transparent;border:1px dashed #B9B1A6;border-radius:3px;color:#7A736D;font:700 10px/1 Apercu,sans-serif;letter-spacing:.14em;text-transform:uppercase;padding:8px 14px;cursor:pointer" style-hover="border-color:#2F2B2B;color:#2F2B2B">Side effect: giver notification</button>
+</sc-if>
+<sc-if value="{{ sideBranch }}" hint-placeholder-val="{{ false }}">
+<button type="button" onClick="{{ backToFlow }}" style="min-height:28px;background:transparent;border:1px dashed #B9B1A6;border-radius:3px;color:#7A736D;font:700 10px/1 Apercu,sans-serif;letter-spacing:.14em;text-transform:uppercase;padding:8px 14px;cursor:pointer" style-hover="border-color:#2F2B2B;color:#2F2B2B">Return to the flow</button>
+</sc-if>
+<sc-if value="{{ showBack }}" hint-placeholder-val="{{ false }}">
+<button type="button" onClick="{{ prev }}" style="min-height:28px;background:transparent;border:1px solid #C3BCB2;border-radius:3px;color:#6B6664;font:700 10px/1 Apercu,sans-serif;letter-spacing:.18em;text-transform:uppercase;padding:8px 14px;cursor:pointer" style-hover="border-color:#2F2B2B;color:#2F2B2B">Back</button>
+</sc-if>
+<sc-if value="{{ showNext }}" hint-placeholder-val="{{ true }}">
+<button type="button" onClick="{{ next }}" style="min-height:28px;background:transparent;border:1px solid #C3BCB2;border-radius:3px;color:#6B6664;font:700 10px/1 Apercu,sans-serif;letter-spacing:.18em;text-transform:uppercase;padding:8px 14px;cursor:pointer" style-hover="border-color:#2F2B2B;color:#2F2B2B">Next</button>
+</sc-if>
+</div>
 </div>
 </div>
 </div>
@@ -663,12 +800,14 @@ class Component extends DCLogic {
       other: false,
       photo: false,
       video: false,
+      errs: {},
       cfg: Object.assign({}, Component.DEFAULTS, kept)
     };
   }
 
   static get DEFAULTS() {
     return {
+      giverEmail: 'amy@example.com',
       receiver: 'Cerys',
       receiverEmail: 'cerys@example.com',
       giverNote: 'You always know exactly what I need. Thought this was very you.',
@@ -682,12 +821,24 @@ class Component extends DCLogic {
   }
 
   ids() {
-    return ['BELIEF','MERCH','CHOOSER','PAY','GCONFIRM','INVITE','REVEAL','WAITING','HOME','BROWSE','RCHECKOUT','THANKASK','COMPOSER','SENT','NEWCHOOSER','NEWPAY','NEWCONFIRM','MOVED','NEWINVITE','DASH','LINEAGE','HAPPENED','CLOSE'];
+    return ['BELIEF','MERCH','CHOOSER','PAY','GCONFIRM','EM01','INVITE','EM03','REVEAL','EM04','WAITING','HOME','BROWSE','RCHECKOUT','THANKASK','EM05','COMPOSER','SENT','EM06','NEWCHOOSER','NEWPAY','NEWCONFIRM','MOVED','NEWINVITE','DASH','LINEAGE','HAPPENED','CLOSE'];
+  }
+
+  passive() {
+    return ['BELIEF','GCONFIRM','EM01','INVITE','NEWCONFIRM','MOVED','NEWINVITE','DASH','LINEAGE','HAPPENED'];
+  }
+
+  sideBranches() {
+    return ['EM03','EM04','EM05','EM06'];
   }
 
   order() {
-    const cont = ['NEWCHOOSER','NEWPAY','NEWCONFIRM','MOVED','NEWINVITE','DASH','LINEAGE'];
-    return this.ids().filter(id => this.state.contIntent || cont.indexOf(id) < 0);
+    const cont = ['NEWCHOOSER','NEWPAY','NEWCONFIRM','MOVED','NEWINVITE'];
+    return this.ids().filter(id => {
+      if (this.sideBranches().indexOf(id) >= 0) return false;
+      if (cont.indexOf(id) >= 0) return !!this.state.contIntent;
+      return true;
+    });
   }
 
   _attach() {
@@ -705,7 +856,7 @@ class Component extends DCLogic {
       const el = this._stage;
       const w = el && el.clientWidth ? el.clientWidth : window.innerWidth;
       const h = el && el.clientHeight ? el.clientHeight : window.innerHeight;
-      const s = Math.min((w - 24) / 1440, (h - 24) / 944);
+      const s = Math.min((w - 24) / 1440, (h - 24) / 988);
       if (!isFinite(s) || s <= 0) return;
       const next = Math.min(1, s);
       if (Math.abs(next - this.state.scale) > 0.001) this.setState({ scale: next });
@@ -715,7 +866,8 @@ class Component extends DCLogic {
     this._key = (e) => {
       const tag = (e.target && e.target.tagName) || '';
       if (tag === 'INPUT' || tag === 'TEXTAREA') return;
-      if (e.key === 'ArrowRight') this.step(1);
+      if (this.sideBranches().indexOf(this.state.cur) >= 0) return;
+      if (e.key === 'ArrowRight' && this.passive().indexOf(this.state.cur) >= 0) this.step(1);
       if (e.key === 'ArrowLeft') this.step(-1);
     };
     window.addEventListener('keydown', this._key);
@@ -735,7 +887,13 @@ class Component extends DCLogic {
   }
 
   go(id) {
-    this.setState({ cur: id, other: false, modal: id === 'HOME' ? true : this.state.modal });
+    const fromEmail = id === 'REVEAL' && (this.state.cur === 'INVITE' || this.state.cur === 'EM03');
+    this.setState({
+      cur: id,
+      other: false,
+      modal: id === 'HOME' ? true : this.state.modal,
+      heart: fromEmail ? false : this.state.heart
+    });
   }
 
   step(d) {
@@ -749,7 +907,7 @@ class Component extends DCLogic {
     this.setState(st => {
       const cfg = Object.assign({}, st.cfg, { [k]: val });
       this.persist({ cfg: cfg });
-      return { cfg: cfg };
+      return { cfg: cfg, errs: Object.assign({}, st.errs, { [k]: '' }) };
     });
   }
 
@@ -762,11 +920,29 @@ class Component extends DCLogic {
     return isFinite(n) ? n : 0;
   }
 
+  validEmail(x) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(String(x || '').trim());
+  }
+
+  gate(map, then) {
+    const errs = {};
+    Object.keys(map).forEach(k => { if (map[k]) errs[k] = map[k]; });
+    this.setState({ errs: errs });
+    if (!Object.keys(errs).length) then();
+  }
+
+  amountOk(x) {
+    const t = String(x || '').trim();
+    if (!t) return false;
+    if (!/^\$?\d+(\.\d{1,2})?$/.test(t)) return false;
+    return this.num(t) >= this.MIN_OTHER_AMOUNT;
+  }
+
   reset() {
     try { window.localStorage.removeItem('lif-partner-v2'); } catch (e) {}
     this.setState({
       cur: 'BELIEF', modal: true, heart: false, contIntent: false,
-      other: false, photo: false, video: false, cfg: Component.DEFAULTS
+      other: false, photo: false, video: false, errs: {}, cfg: Component.DEFAULTS
     });
   }
 
@@ -785,14 +961,24 @@ class Component extends DCLogic {
     const chosen = catalog[0];
     const MERCHANT = ['MERCH','PAY','GCONFIRM','HOME','BROWSE','RCHECKOUT','THANKASK','NEWPAY','NEWCONFIRM'];
     const LIFCO = ['CHOOSER','REVEAL','WAITING','COMPOSER','SENT','NEWCHOOSER','DASH','LINEAGE'];
-    const EMAILS = ['INVITE','MOVED','NEWINVITE'];
+    const EMAILS = ['EM01','INVITE','EM03','EM04','EM05','EM06','MOVED','NEWINVITE'];
     const remaining = Math.max(0, chosen.n - this.num(c.amount));
+    const er = st.errs || {};
+    const amtOut = (x, ph) => { const n = this.num(x); return n > 0 ? this.money(n) : ph; };
+    const labels = {
+      EM01: 'Email \u00b7 Giver', INVITE: 'Email \u00b7 Receiver',
+      EM03: 'Email \u00b7 Receiver \u00b7 If unopened', EM04: 'Email \u00b7 Giver',
+      EM05: 'Email \u00b7 Receiver', EM06: 'Email \u00b7 Giver',
+      MOVED: 'Email \u00b7 Giver', NEWINVITE: 'Email \u00b7 Receiver'
+    };
     const s = {};
     this.ids().forEach(id => { s[id] = id === st.cur; });
 
-    const fields = ['receiver','receiverEmail','giverNote','amount','receiverNote','newReceiver','newReceiverEmail','newNote','newAmount'];
+    const fields = ['giverEmail','receiver','receiverEmail','giverNote','amount','receiverNote','newReceiver','newReceiverEmail','newNote','newAmount'];
     const on = {};
     fields.forEach(k => { on[k] = (e) => this.set(k, e.target.value); });
+    on.amount = (e) => this.set('amount', e.target.value.replace(/[^0-9.]/g, ''));
+    on.newAmount = (e) => this.set('newAmount', e.target.value.replace(/[^0-9.]/g, ''));
 
     return {
       s: s,
@@ -806,7 +992,22 @@ class Component extends DCLogic {
       ownLif: LIFCO.indexOf(st.cur) >= 0,
       ownEmail: EMAILS.indexOf(st.cur) >= 0,
       ownNone: MERCHANT.concat(LIFCO, EMAILS).indexOf(st.cur) < 0,
-      showBack: st.cur !== 'BELIEF' && st.cur !== 'CLOSE',
+      emailLabel: labels[st.cur] || 'Email',
+      err: {
+        receiver: er.receiver || '', receiverEmail: er.receiverEmail || '',
+        giverNote: er.giverNote || '', amount: er.amount || '',
+        giverEmail: er.giverEmail || '', checkoutEmail: er.checkoutEmail || '',
+        newPayEmail: er.newPayEmail || '', newReceiver: er.newReceiver || '',
+        newReceiverEmail: er.newReceiverEmail || '', newNote: er.newNote || '',
+        newAmount: er.newAmount || ''
+      },
+      sideBranch: this.sideBranches().indexOf(st.cur) >= 0,
+      peekReminder: st.cur === 'INVITE',
+      peekHeart: st.cur === 'REVEAL' && st.heart,
+      peekGratitudeEmail: st.cur === 'THANKASK',
+      peekGratitudeReceived: st.cur === 'SENT',
+      showNext: this.passive().indexOf(st.cur) >= 0,
+      showBack: st.cur !== 'BELIEF' && st.cur !== 'CLOSE' && this.sideBranches().indexOf(st.cur) < 0,
       modalOpen: st.cur === 'HOME' && st.modal,
       modalClosed: st.cur === 'HOME' && !st.modal,
       heart: st.heart,
@@ -821,18 +1022,19 @@ class Component extends DCLogic {
       price: chosen.price,
       remainingTotal: this.money(remaining),
       p1: catalog[0], p2: catalog[1], p3: catalog[2], p4: catalog[3],
+      giverEmail: v(c.giverEmail, '(GIVER EMAIL)'),
       receiverEmail: v(c.receiverEmail, '(RECEIVER EMAIL)'),
       newReceiverEmail: v(c.newReceiverEmail, '(RECEIVER EMAIL)'),
       newGiver: v(c.receiver, '(RECEIVER NAME)'),
       newNote: v(c.newNote, '(GIVER NOTE)'),
       receiver: v(c.receiver, '(RECEIVER NAME)'),
       giverNote: v(c.giverNote, '(GIVER NOTE)'),
-      amount: v(c.amount, '(AMOUNT)'),
+      amount: amtOut(c.amount, '(AMOUNT)'),
       receiverNote: v(c.receiverNote, '(RECEIVER NOTE)'),
       newReceiver: v(c.newReceiver, '(RECEIVER NAME)'),
-      newAmount: v(c.newAmount, '(AMOUNT)'),
+      newAmount: amtOut(c.newAmount, '(AMOUNT)'),
       raw: {
-        receiver: c.receiver, receiverEmail: c.receiverEmail, giverNote: c.giverNote,
+        giverEmail: c.giverEmail, receiver: c.receiver, receiverEmail: c.receiverEmail, giverNote: c.giverNote,
         amount: c.amount, receiverNote: c.receiverNote, newReceiver: c.newReceiver,
         newReceiverEmail: c.newReceiverEmail, newNote: c.newNote, newAmount: c.newAmount
       },
@@ -853,6 +1055,13 @@ class Component extends DCLogic {
         { k: 'Net margin preservation', v: '(AMOUNT)' }
       ],
       replay: () => this.reset(),
+      enterReveal: () => this.setState({ heart: false }, () => this.go('REVEAL')),
+      viewReminder: () => this.go('EM03'),
+      viewHeartEmail: () => this.go('EM04'),
+      viewGratitudeEmail: () => this.go('EM05'),
+      viewGratitudeReceived: () => this.go('EM06'),
+      goComposer: () => this.go('COMPOSER'),
+      backToFlow: () => this.go({ EM03: 'INVITE', EM04: 'REVEAL', EM05: 'THANKASK', EM06: 'SENT' }[st.cur] || 'REVEAL'),
       next: () => this.step(1),
       prev: () => this.step(-1),
       sendHeart: () => this.setState({ heart: true }),
@@ -861,6 +1070,27 @@ class Component extends DCLogic {
       addVideo: () => this.setState({ video: true }),
       notNowFn: () => this.setState({ contIntent: false }, () => this.go('HAPPENED')),
       continueAct: () => this.setState({ contIntent: true }, () => this.go('NEWCHOOSER')),
+      submitChooser: () => this.gate({
+        receiver: c.receiver && c.receiver.trim() ? '' : 'Who came to mind?',
+        receiverEmail: this.validEmail(c.receiverEmail) ? '' : 'Check the email address.',
+        giverNote: c.giverNote && c.giverNote.trim() ? '' : 'A few words is plenty.',
+        amount: this.amountOk(c.amount) ? '' : 'Choose an amount.'
+      }, () => this.step(1)),
+      submitNewChooser: () => this.gate({
+        newReceiver: c.newReceiver && c.newReceiver.trim() ? '' : 'Who came to mind?',
+        newReceiverEmail: this.validEmail(c.newReceiverEmail) ? '' : 'Check the email address.',
+        newNote: c.newNote && c.newNote.trim() ? '' : 'A few words is plenty.',
+        newAmount: this.amountOk(c.newAmount) ? '' : 'Choose an amount.'
+      }, () => this.step(1)),
+      payGiver: () => this.gate({
+        giverEmail: this.validEmail(c.giverEmail) ? '' : 'Check the email address.'
+      }, () => this.step(1)),
+      payReceiver: () => this.gate({
+        checkoutEmail: this.validEmail(c.receiverEmail) ? '' : 'Check the email address.'
+      }, () => this.step(1)),
+      payNew: () => this.gate({
+        newPayEmail: this.validEmail(c.receiverEmail) ? '' : 'Check the email address.'
+      }, () => this.step(1)),
       amt15: () => { this.set('amount', '$15'); this.setState({ other: false }); },
       amt25: () => { this.set('amount', '$25'); this.setState({ other: false }); },
       amt50: () => { this.set('amount', '$50'); this.setState({ other: false }); },
