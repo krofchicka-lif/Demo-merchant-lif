@@ -30,9 +30,10 @@ button{white-space:nowrap}
 @media (max-width:760px){
 html,body{height:auto;overflow-x:hidden}
 [style*="height: 100vh"],[style*="height:100vh"]{height:auto!important;min-height:100vh!important;overflow:visible!important}
+[data-stage="holder"]{flex:0 0 auto!important;min-height:0!important;overflow:visible!important}
 [style*="transform-origin: center center"]{position:static!important;left:auto!important;top:auto!important;width:100%!important;height:auto!important;transform:none!important}
 [style*="width: 1440px"],[style*="width:1440px"]{width:100%!important;min-width:0!important;max-width:100%!important}
-[style*="height: 900px"],[style*="height:900px"],[style*="height: 988px"]{height:auto!important;min-height:0!important;overflow:visible!important}
+[style*="height: 900px"],[style*="height:900px"],[style*="height: 944px"]{height:auto!important;min-height:0!important;overflow:visible!important}
 [style*="max-width:"]{max-width:100%!important}
 img{max-width:100%}
 [style*="width: 520px"],[style*="width: 780px"],[style*="width: 560px"],[style*="width: 600px"],[style*="width: 420px"],[style*="width: 340px"],[style*="width: 1220px"]{width:100%!important;flex:0 0 auto!important;border-left:none!important}
@@ -57,7 +58,8 @@ img{max-width:100%}
 [style*=" 14px /"],[style*=" 13px /"]{font-size:12px!important}
 button[style*="min-height: 60px"],button[style*="min-height: 62px"],button[style*="min-height: 56px"],button[style*="min-height: 52px"]{width:100%!important;min-height:52px!important;white-space:normal!important;padding-left:18px!important;padding-right:18px!important}
 [style*="display: flex"][style*="gap: 16px"] > button[style*="min-height"]{flex:1 1 100%!important}
-[style*="height: 44px"][style*="justify-content: space-between"]{height:auto!important;flex-wrap:wrap!important;gap:8px!important;padding:10px 12px calc(10px + env(safe-area-inset-bottom))!important;position:sticky!important;bottom:0!important;z-index:5}
+[style*="height: 44px"][style*="justify-content: space-between"]{height:auto!important;flex-wrap:wrap!important;justify-content:flex-end!important;gap:8px!important;padding:12px 14px calc(14px + env(safe-area-inset-bottom))!important}
+[style*="height: 44px"][style*="justify-content: space-between"] > [style*="letter-spacing: 0.2em"]{display:none!important}
 [style*="height: 44px"]:not([style*="justify-content"]){height:34px!important;font-size:10px!important}
 [style*="position: absolute"][style*="inset: 0px"]{position:fixed!important;padding:16px!important;align-items:flex-start!important;overflow-y:auto!important}
 [data-chain="canvas"]{position:static!important;height:auto!important;display:flex!important;flex-direction:column!important;align-items:flex-start!important}
@@ -83,8 +85,9 @@ button,input,textarea{box-sizing:border-box!important}
 </style>
 </helmet>
 
-<div ref="{{ stageRef }}" style="position:relative;width:100vw;height:100vh;background:#E7E2DA;font-family:Apercu,sans-serif;color:#2F2B2B;-webkit-font-smoothing:antialiased;overflow:hidden">
-<div style="position:absolute;left:50%;top:50%;width:1440px;height:988px;transform-origin:center center;transform:translate(-50%,-50%) scale({{ scale }});display:flex;flex-direction:column">
+<div style="position:relative;width:100vw;height:100vh;background:#E7E2DA;font-family:Apercu,sans-serif;color:#2F2B2B;-webkit-font-smoothing:antialiased;overflow:hidden;display:flex;flex-direction:column">
+<div ref="{{ stageRef }}" data-stage="holder" style="position:relative;flex:1 1 auto;min-height:0;overflow:hidden">
+<div style="position:absolute;left:50%;top:50%;width:1440px;height:944px;transform-origin:center center;transform:translate(-50%,-50%) scale({{ scale }});display:flex;flex-direction:column">
 <sc-if value="{{ ownMerchant }}" hint-placeholder-val="{{ false }}">
 <div style="height:44px;flex:0 0 auto;display:flex;align-items:center;padding:0 18px;font:700 13px/1 Apercu,sans-serif;letter-spacing:.2em;text-transform:uppercase;background:#FFAC00;color:#2F2B2B">Shopify / Merchant</div>
 </sc-if>
@@ -953,7 +956,8 @@ button,input,textarea{box-sizing:border-box!important}
 </sc-if>
 
 </div>
-<div style="height:44px;flex:0 0 auto;background:#E7E2DA;border-top:1px solid #D6CFC5;display:flex;align-items:center;justify-content:space-between;padding:0 18px">
+</div>
+<div style="height:44px;flex:0 0 auto;background:#E7E2DA;border-top:1px solid #D6CFC5;display:flex;align-items:center;justify-content:space-between;padding:0 18px;position:relative;z-index:20">
 <div style="font:700 11px/1 Apercu,sans-serif;letter-spacing:.2em;text-transform:uppercase;color:#8C857E">Demo navigation</div>
 <div style="display:flex;align-items:center;gap:10px">
 <sc-if value="{{ peekReminder }}" hint-placeholder-val="{{ false }}">
@@ -1059,13 +1063,18 @@ class Component extends DCLogic {
       const el = this._stage;
       const w = el && el.clientWidth ? el.clientWidth : window.innerWidth;
       const h = el && el.clientHeight ? el.clientHeight : window.innerHeight;
-      const s = Math.min((w - 24) / 1440, (h - 24) / 988);
+      const s = Math.min((w - 24) / 1440, (h - 16) / 944);
       if (!isFinite(s) || s <= 0) return;
       const next = Math.min(1, s);
       if (Math.abs(next - this.state.scale) > 0.001) this.setState({ scale: next });
     };
     this._attach();
+    this._fit();
+    requestAnimationFrame(() => this._fit && this._fit());
+    setTimeout(() => this._fit && this._fit(), 120);
+    setTimeout(() => this._fit && this._fit(), 600);
     window.addEventListener('resize', this._fit);
+    window.addEventListener('orientationchange', this._fit);
     this._key = (e) => {
       const tag = (e.target && e.target.tagName) || '';
       if (tag === 'INPUT' || tag === 'TEXTAREA') return;
