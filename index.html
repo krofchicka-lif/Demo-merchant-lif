@@ -83,8 +83,14 @@ button[style*="min-height"]{min-height:52px!important;white-space:normal!importa
 [data-chain="linkfill"]{animation:none!important}
 }
 
-/* portrait: columns stack, amounts 2x2, CTAs full width */
+/* portrait: phone-width layout, columns stack, amounts 2x2, CTAs full width */
 @media (max-width:760px) and (orientation:portrait){
+html,body{overflow-x:hidden!important;overflow-y:auto!important}
+[style*="height: 100vh"]{min-height:100svh!important}
+[data-m="stage"]{min-height:calc(100svh - 76px)!important;display:flex!important;flex-direction:column!important}
+[data-m="stageshell"]{flex:1 1 auto!important;display:flex!important;flex-direction:column!important}
+[data-m="screen"]{flex:1 1 auto!important;min-height:calc(100svh - 108px)!important;justify-content:flex-start!important}
+[data-m="screen"][style*="background: rgb(255, 255, 255)"]{min-height:calc(100svh - 76px)!important}
 [data-m="split"]{flex-direction:column!important;gap:24px!important}
 [data-m="split"] > *{border-left:none!important;padding-left:0!important;width:100%!important;flex:0 0 auto!important;min-width:0!important}
 [data-m="summary"]{width:100%!important;border-left:none!important;border-top:1px solid #E5E2DE!important}
