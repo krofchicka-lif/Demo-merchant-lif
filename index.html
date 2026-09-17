@@ -15,7 +15,7 @@
 @font-face{font-family:'Apercu';src:url('fonts/Apercu-Regular.otf') format('opentype');font-weight:400;font-style:normal;font-display:swap}
 @font-face{font-family:'Apercu';src:url('fonts/Apercu-Bold.otf') format('opentype');font-weight:700;font-style:normal;font-display:swap}
 *,*::before,*::after{box-sizing:border-box}
-html,body{margin:0;padding:0;background:#E7E2DA}
+html,body{margin:0;padding:0;background:#FBF9F6}
 a{color:#2F2B2B;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:.18em}
 a:hover{color:#2F2B2B;text-decoration-color:#F3A43A;text-decoration-thickness:2px}
 input::placeholder,textarea::placeholder{color:#8C857E;opacity:1}
@@ -27,104 +27,91 @@ button{white-space:nowrap}
 @keyframes lifNode{from{opacity:0;transform:scale(.9)}to{opacity:1;transform:none}}
 @keyframes lifChip{0%{opacity:0;transform:translateY(6px);color:#2F2B2B;border-color:#2F2B2B}30%{opacity:1;transform:none;color:#2F2B2B;border-color:#2F2B2B}62%{opacity:1;color:#2F2B2B;border-color:#2F2B2B}100%{opacity:1;transform:none;color:#6B6664;border-color:#D8CFC2}}
 @keyframes lifRow{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
-@media (max-width:760px){
-/* 1. stage: no desktop scaling, natural document flow */
+@media (max-width:760px),(max-height:500px) and (orientation:landscape){
+/* stage flows instead of scaling; screens keep their own design */
 html,body{height:auto!important;overflow-x:hidden}
 [style*="height: 100vh"]{height:auto!important;min-height:100vh!important;overflow:visible!important}
 [data-stage="holder"]{position:static!important;flex:0 0 auto!important;min-height:0!important;overflow:visible!important}
 [data-m="stage"]{position:static!important;left:auto!important;top:auto!important;width:100%!important;height:auto!important;transform:none!important}
-[data-m="stageshell"]{width:100%!important;max-width:100%!important;height:auto!important;overflow:visible!important}
-[data-m="screen"]{width:100%!important;max-width:100%!important;height:auto!important;min-height:0!important;overflow:visible!important;box-sizing:border-box!important;padding:22px 20px 34px!important;gap:20px!important}
+[data-m="stageshell"],[data-m="screen"]{width:100%!important;max-width:100%!important;height:auto!important;min-height:0!important;overflow:visible!important}
+[data-m="screen"]{padding:26px 20px 34px!important;gap:22px!important}
 [data-m="screen"][style*="background: rgb(255, 255, 255)"]{padding:0!important;gap:0!important}
-[data-m="screen"] > [style*="flex: 1"]{flex:0 0 auto!important;min-height:0!important;gap:22px!important}
-
-/* 2. demo chrome */
+[data-m="screen"] > [style*="flex: 1"]{flex:0 0 auto!important;min-height:0!important}
 [data-m="ownbar"]{height:32px!important;font-size:10px!important;padding:0 16px!important}
-[data-m="nav"]{height:auto!important;flex-wrap:wrap!important;justify-content:flex-end!important;gap:8px!important;padding:12px 14px calc(14px + env(safe-area-inset-bottom))!important}
+[data-m="nav"]{height:auto!important;flex-wrap:wrap!important;justify-content:flex-end!important;gap:8px!important;padding:11px 14px calc(13px + env(safe-area-inset-bottom))!important}
 [data-m="nav"] > [style*="letter-spacing: 0.2em"]{display:none!important}
 
-/* 3. brand marks never stretch */
-img[data-m="mark"]{height:25px!important;width:auto!important;max-width:none!important;flex:0 0 auto!important}
+/* logos stay a quiet signature */
+img[data-m="mark"]{height:24px!important;width:auto!important;max-width:none!important;flex:0 0 auto!important}
 img[data-m="wm"]{height:12px!important;width:auto!important;max-width:none!important;flex:0 0 auto!important}
 img[data-m="heart"]{height:28px!important;width:auto!important;max-width:none!important;flex:0 0 auto!important}
 img:not([data-m]){max-width:100%}
 
-/* 4. desktop columns stack */
-[data-m="split"]{flex-direction:column!important;gap:24px!important}
-[data-m="split"] > *{border-left:none!important;padding-left:0!important;width:100%!important;flex:0 0 auto!important;min-width:0!important}
-[data-m="summary"]{width:100%!important;border-left:none!important;border-top:1px solid #E5E2DE!important;padding:22px 20px 26px!important}
-[data-m="mcol"]{padding:20px 20px 24px!important;gap:18px!important}
+/* only oversized display type comes down; body copy untouched */
+[style*=" 88px /"],[style*=" 82px /"]{font-size:36px!important;line-height:1.1!important}
+[style*=" 76px /"],[style*=" 72px /"],[style*=" 66px /"],[style*=" 64px /"],[style*=" 62px /"],[style*=" 60px /"]{font-size:33px!important;line-height:1.14!important}
+[style*=" 58px /"],[style*=" 56px /"],[style*=" 54px /"],[style*=" 52px /"],[style*=" 50px /"]{font-size:30px!important;line-height:1.18!important}
+[style*=" 48px /"],[style*=" 46px /"],[style*=" 44px /"],[style*=" 42px /"],[style*=" 40px /"]{font-size:26px!important;line-height:1.24!important}
+[style*=" 38px /"],[style*=" 36px /"],[style*=" 34px /"]{font-size:23px!important;line-height:1.35!important}
+[style*=" 30px /"],[style*=" 28px /"],[style*=" 27px /"],[style*=" 26px /"]{font-size:18px!important;line-height:1.5!important}
+[style*=" 25px /"],[style*=" 24px /"],[style*=" 23px /"],[style*=" 22px /"],[style*=" 21px /"],[style*=" 20px /"]{font-size:17px!important;line-height:1.55!important}
+[style*="max-width:"]{max-width:100%!important}
 
-/* 5. Shopify thank-you: confirmation, then the LIF moment, then the detail */
-[data-m="mcol"] > *{order:4}
-[data-m="ohead"]{order:1}
-[data-m="oconf"]{order:2}
-[data-m="lifmod"]{order:3;padding:20px 18px 22px!important}
-[data-m="oinfo"]{order:5}
-[data-m="oinfo"] [style*="grid-template-columns"]{grid-template-columns:1fr!important;gap:14px!important}
-
-/* 6. merchant storefront */
-[data-m="mnav"]{height:auto!important;flex-wrap:wrap!important;gap:10px!important;padding:12px 16px!important;justify-content:center!important}
-[data-m="mnav"] > [style*="gap: 34px"],[data-m="mnav"] > [style*="gap: 26px"],[data-m="mnav"] > [style*="gap: 38px"]{display:none!important}
+/* desktop fixed widths fit the phone; structure otherwise as designed */
+[style*="width: 1220px"],[style*="width: 780px"],[style*="width: 600px"],[style*="width: 560px"],[style*="width: 520px"],[style*="width: 420px"],[style*="width: 340px"]{width:100%!important;max-width:100%!important}
+[data-m="mcol"]{padding:22px 20px 26px!important;gap:18px!important}
+[data-m="lifmod"]{padding:20px 18px 22px!important}
+[data-m="summary"]{padding:22px 20px 26px!important}
+[data-m="emailpage"]{padding:18px 16px 30px!important;justify-content:flex-start!important}
+[data-m="emailmeta"]{padding:14px 16px!important}
+[data-m="emailbody"]{padding:26px 18px 28px!important;gap:18px!important}
+[data-m="mnav"]{height:auto!important;flex-wrap:wrap!important;gap:10px!important;padding:12px 16px!important}
 [data-m="hero"]{flex:0 0 auto!important;height:210px!important;min-height:210px!important}
 img[src*="merchant-hero"]{position:static!important;top:auto!important;left:auto!important;width:100%!important;height:100%!important;object-fit:cover!important}
-[data-m="pgrid"]{grid-template-columns:1fr 1fr!important;gap:14px!important;padding:16px!important}
+[data-m="pgrid"]{gap:14px!important;padding:16px!important}
 [data-m="pgrid"] img{height:150px!important}
-[style*="width: 110px"]{width:auto!important;flex:1 1 100%!important}
-
-/* 7. forms and CTAs */
-[data-m="amts"]{grid-template-columns:1fr 1fr!important;gap:10px!important}
-input,textarea{width:100%!important;box-sizing:border-box!important;min-height:48px!important;font-size:16px!important}
+input,textarea{width:100%!important;min-height:48px!important;font-size:16px!important}
 textarea{min-height:96px!important}
-button{box-sizing:border-box!important}
-button[style*="min-height"]{width:100%!important;min-height:52px!important;white-space:normal!important;padding-left:18px!important;padding-right:18px!important}
-[style*="display: flex"][style*="gap: 16px"]{flex-wrap:wrap!important}
-
-/* 8. email screens */
-[data-m="emailpage"]{padding:16px 16px 30px!important;justify-content:flex-start!important}
-[data-m="emailmeta"]{padding:14px 16px!important;gap:6px!important}
-[data-m="emailbody"]{padding:26px 18px 28px!important;gap:18px!important}
-
-/* 9. modal */
-[data-m="overlay"]{position:fixed!important;align-items:center!important;justify-content:center!important;overflow-y:auto!important;padding:16px 16px calc(22px + env(safe-area-inset-bottom))!important}
+button[style*="min-height"]{min-height:52px!important;white-space:normal!important}
+[data-m="overlay"]{position:fixed!important;overflow-y:auto!important;padding:18px 16px calc(24px + env(safe-area-inset-bottom))!important}
 [data-m="sheet"]{width:calc(100vw - 32px)!important;max-width:420px!important;padding:26px 22px 28px!important;gap:16px!important}
-
-/* 10. reporting */
-[data-m="metrics"]{grid-template-columns:1fr 1fr!important;gap:0 18px!important;align-content:start!important}
-[data-m="metrics"] > div > div{padding:18px 0 22px!important}
 [data-chain="canvas"]{position:static!important;width:100%!important;height:auto!important;display:flex!important;flex-direction:column!important;align-items:flex-start!important}
 [data-chain="node"],[data-chain="chips"]{position:static!important;left:auto!important;top:auto!important}
 [data-chain="node"]{width:84px!important;height:84px!important}
 [data-chain="chips"]{width:100%!important;flex-direction:row!important;flex-wrap:wrap!important;gap:7px!important;padding:10px 0 4px!important}
 [data-chain="link"]{position:static!important;transform:none!important;width:2px!important;height:24px!important;margin:2px 0 2px 41px!important}
 [data-chain="linkfill"]{animation:none!important}
-
-/* 11. remaining desktop fixed widths */
-[style*="width: 1220px"],[style*="width: 780px"],[style*="width: 600px"],[style*="width: 560px"],[style*="width: 520px"],[style*="width: 420px"],[style*="width: 340px"]{width:100%!important;max-width:100%!important}
-[style*="max-width:"]{max-width:100%!important}
-[style*="align-items: flex-end"][style*="justify-content: space-between"]{flex-direction:column!important;align-items:stretch!important;gap:18px!important}
-[style*="height: 390px"]{height:200px!important}
-[style*="height: 120px"]:not([style*="min-height"]){height:96px!important}
-
-/* 12. mobile type scale */
-[style*=" 88px /"],[style*=" 82px /"],[style*=" 76px /"],[style*=" 72px /"]{font-size:34px!important;line-height:1.12!important}
-[style*=" 66px /"],[style*=" 64px /"],[style*=" 62px /"],[style*=" 60px /"]{font-size:30px!important;line-height:1.16!important}
-[style*=" 58px /"],[style*=" 56px /"],[style*=" 54px /"],[style*=" 52px /"],[style*=" 50px /"]{font-size:27px!important;line-height:1.2!important}
-[style*=" 48px /"],[style*=" 46px /"],[style*=" 44px /"],[style*=" 42px /"],[style*=" 40px /"]{font-size:25px!important;line-height:1.24!important}
-[style*=" 38px /"],[style*=" 36px /"],[style*=" 34px /"]{font-size:22px!important;line-height:1.35!important}
-[style*=" 30px /"],[style*=" 28px /"]{font-size:19px!important;line-height:1.45!important}
-[style*=" 27px /"],[style*=" 26px /"],[style*=" 25px /"],[style*=" 24px /"]{font-size:17px!important;line-height:1.5!important}
-[style*=" 23px /"],[style*=" 22px /"],[style*=" 21px /"],[style*=" 20px /"]{font-size:16px!important;line-height:1.55!important}
-[style*=" 19px /"],[style*=" 18px /"]{font-size:15px!important;line-height:1.55!important}
-[style*=" 17px /"],[style*=" 16px /"],[style*=" 15px /"]{font-size:14px!important}
-[style*=" 14px /"],[style*=" 13px /"]{font-size:12px!important}
-div[style*=" 62px /"]{font-size:27px!important}
 }
+
+/* portrait: columns stack, amounts 2x2, CTAs full width */
+@media (max-width:760px) and (orientation:portrait){
+[data-m="split"]{flex-direction:column!important;gap:24px!important}
+[data-m="split"] > *{border-left:none!important;padding-left:0!important;width:100%!important;flex:0 0 auto!important;min-width:0!important}
+[data-m="summary"]{width:100%!important;border-left:none!important;border-top:1px solid #E5E2DE!important}
+[data-m="amts"]{grid-template-columns:1fr 1fr!important;gap:10px!important}
+[data-m="pgrid"]{grid-template-columns:1fr 1fr!important}
+[data-m="metrics"]{grid-template-columns:1fr 1fr!important;gap:0 18px!important;align-content:start!important}
+[data-m="oinfo"] [style*="grid-template-columns"]{grid-template-columns:1fr!important;gap:14px!important}
+button[style*="min-height"]{width:100%!important}
+}
+
+/* landscape phones: use the width, keep mobile sizing */
+@media (max-height:500px) and (orientation:landscape){
+[data-m="screen"]{padding:22px 26px 28px!important}
+[data-m="split"]{flex-direction:row!important;gap:26px!important}
+[data-m="summary"]{width:40%!important;max-width:44%!important;flex:0 0 auto!important}
+[data-m="amts"]{grid-template-columns:repeat(4,1fr)!important}
+[data-m="pgrid"]{grid-template-columns:repeat(3,1fr)!important}
+[data-m="metrics"]{grid-template-columns:repeat(3,1fr)!important;align-content:start!important}
+[data-m="hero"]{height:240px!important;min-height:240px!important}
+button[style*="min-height"]{width:auto!important}
+}
+
 
 </style>
 </helmet>
 
-<div style="position:relative;width:100vw;height:100vh;background:#F5F2EE;font-family:Apercu,sans-serif;color:#2F2B2B;-webkit-font-smoothing:antialiased;overflow:hidden;display:flex;flex-direction:column">
+<div style="position:relative;width:100vw;height:100vh;background:#FBF9F6;font-family:Apercu,sans-serif;color:#2F2B2B;-webkit-font-smoothing:antialiased;overflow:hidden;display:flex;flex-direction:column">
 <div ref="{{ stageRef }}" data-stage="holder" style="position:relative;flex:1 1 auto;min-height:0;overflow:hidden">
 <div data-m="stage" style="position:absolute;left:50%;top:50%;width:1440px;height:944px;transform-origin:center center;transform:translate(-50%,-50%) scale({{ scale }});display:flex;flex-direction:column">
 <sc-if value="{{ ownMerchant }}" hint-placeholder-val="{{ false }}">
@@ -996,7 +983,7 @@ div[style*=" 62px /"]{font-size:27px!important}
 
 </div>
 </div>
-<div data-m="nav" style="height:44px;flex:0 0 auto;background:#E7E2DA;border-top:1px solid #D6CFC5;display:flex;align-items:center;justify-content:space-between;padding:0 18px;position:relative;z-index:20">
+<div data-m="nav" style="height:44px;flex:0 0 auto;background:#FBF9F6;border-top:1px solid #E2DCD3;display:flex;align-items:center;justify-content:space-between;padding:0 18px;position:relative;z-index:20">
 <div style="font:700 11px/1 Apercu,sans-serif;letter-spacing:.2em;text-transform:uppercase;color:#8C857E">Demo navigation</div>
 <div style="display:flex;align-items:center;gap:10px">
 <sc-if value="{{ peekReminder }}" hint-placeholder-val="{{ false }}">
@@ -1102,7 +1089,8 @@ class Component extends DCLogic {
       const el = this._stage;
       const w = el && el.clientWidth ? el.clientWidth : window.innerWidth;
       const h = el && el.clientHeight ? el.clientHeight : window.innerHeight;
-      if (w <= 760) { if (this.state.scale !== 1) this.setState({ scale: 1 }); return; }
+      const mobile = window.matchMedia('(max-width:760px),(max-height:500px) and (orientation:landscape)').matches;
+      if (mobile) { if (this.state.scale !== 1) this.setState({ scale: 1 }); return; }
       const s = Math.min((w - 24) / 1440, (h - 16) / 944);
       if (!isFinite(s) || s <= 0) return;
       const next = Math.min(1, s);
